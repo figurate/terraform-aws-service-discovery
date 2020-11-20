@@ -19,8 +19,7 @@ No requirements.
 | description | Namespace description | `any` | n/a | yes |
 | name | Namespace name | `any` | n/a | yes |
 | namespace\_type | The type of namespace to create (private, public or HTTP) | `string` | `"private"` | no |
-| vpc\_default | Use the default VPC for private namespaces | `bool` | `true` | no |
-| vpc\_tags | Lookup tags to identify VPC for private namespaces | `map(any)` | `{}` | no |
+| vpc | VPC identifier for private namespaces | `any` | `null` | no |
 
 ## Outputs
 
