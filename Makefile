@@ -2,20 +2,20 @@ SHELL:=/bin/bash
 include .env
 
 EXAMPLE=$(wordlist 2, $(words $(MAKECMDGOALS)), $(MAKECMDGOALS))
+VERSION=$(wordlist 2, $(words $(MAKECMDGOALS)), $(MAKECMDGOALS))
 
-.PHONY: all clean validate test docs format
+.PHONY: all clean validate test diagram docs format release
 
-all: validate test docs format
+all: test docs format
 
 clean:
 	rm -rf .terraform/
 
 validate:
-	$(TERRAFORM) init && $(TERRAFORM) validate
+	$(TERRAFORM) init -upgrade && $(TERRAFORM) validate
 
 test: validate
 	$(CHECKOV) -d /work
-
 	$(TFSEC) /work
 
 diagram:
@@ -29,4 +29,7 @@ format:
 		$(TERRAFORM) fmt -list=true ./examples/default
 
 example:
-	$(TERRAFORM) init examples/$(EXAMPLE) && $(TERRAFORM) plan -input=false examples/$(EXAMPLE)
+	$(TERRAFORM) -chdir=examples/$(EXAMPLE) init -upgrade && $(TERRAFORM) -chdir=examples/$(EXAMPLE) plan -input=false
+
+release: test
+	git tag $(VERSION) && git push --tags
