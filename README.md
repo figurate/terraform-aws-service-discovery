@@ -1,5 +1,7 @@
 # AWS Service Discovery Namespace
 
+[![CI](https://github.com/figurate/terraform-aws-service-discovery-namespace/actions/workflows/main.yml/badge.svg)](https://github.com/figurate/terraform-aws-service-discovery-namespace/actions/workflows/main.yml)
+
 ![AWS Service Discovery Namespace](aws\_service\_discovery\_namespace.png)
 
 ## Requirements
